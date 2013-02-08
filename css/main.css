@@ -1,0 +1,16 @@
+body {
+	background-image: url('../img/pattern.png');
+}
+
+#wrapper {
+	position: absolute;
+	border: 1px solid #A9F5F2;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin: 5% 5%;
+	background-color: rgba(255,255,255,0.6);
+	opacity: 60%;
+	padding: 2%;
+	width: 85%;
+	height: 86%;
+}
