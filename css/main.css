@@ -119,6 +119,22 @@ h1 {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
 }
 
+#dones li.label {
+	padding: 7px;
+	font-family: 'Galindo', cursive;
+	font-size: 19px;
+	color: #5D622D;
+	text-align: center;
+}
+
+#removes li.label {
+	padding: 7px;
+	font-family: 'Galindo', cursive;
+	font-size: 19px;
+	color: #62322D;
+	text-align: center;
+}
+
 #done_wrapper, #remove_wrapper {
 	display: block;
 	float: left;
@@ -181,10 +197,6 @@ h1 {
 #dones img, #removes img {
 	height: 20px;
 	weight: 20px;
-}
-
-.first_icon {
-	visibility: hidden;
 }
 
 #pref {
