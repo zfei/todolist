@@ -60,7 +60,7 @@ $(document).ready(function() {
 			var task_name = tasks[i].task_name;
 			var done = tasks[i].done;
 			$('#tasks').append('<li class="task' + i + '">' + task_name + '</li>');
-			$('#dones').append('<li class="task' + i + '"><img class="undone" src="./img/icon/' + done + '.png"></li>');
+			$('#dones').append('<li class="task' + i + '"><img class="' + done +'" src="./img/icon/' + done + '.png"></li>');
 			$('#removes').append('<li class="task' + i + '"><img class="remove" src="./img/icon/del.png"></li>');
 		}
 	}
