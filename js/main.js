@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	var setLists = function(lists) {
+		localStorage.setItem("lists", JSON.stringify(lists));
+	}
+
 	var getLists = function() {
 		var lists = localStorage.getItem("lists");
 		if(lists === null) {
@@ -65,19 +69,53 @@ $(document).ready(function() {
 
 	showTasks();
 
-	$('#new_list').click(function() {
+	var addList = function(list_name) {
+		var lists = getLists();
+		var list_obj = {
+			"list_name": list_name,
+			"tasks": []
+		};
+		lists.push(list_obj);
+		setLists(lists);
+	}
+
+	var addTask = function(task_name) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_name = $('#list .selected').html();
+		if(list_name === null) {
+			return;
+		}
+		for(var i = 0; i < lists.length; i++) {
+			if(lists[i].list_name === list_name) {
+				lists[i].tasks.push({
+					"task_name": task_name,
+					"done": "undone"
+				});
+				setLists(lists);
+				break;
+			}
+		}
+	}
+
+	$(document).on("click", "#new_list", function() {
 		var list_name = prompt("Please enter list name", "My List");
 		if(list_name != null && list_name != "") {
 			$('#list').append('<li>' + list_name + '</li>');
+			addList(list_name);
 		}
 	});
 
-	$('#new_task').click(function() {
+	$(document).on("click", "#new_task", function() {
 		var task_name = prompt("Please enter task name", "My task");
 		if(task_name != null && task_name != "") {
-			$('#tasks').append('<li class="task task">' + task_name + '</li>');
-			$('#dones').append('<li class="task"><img class="undone" src="./img/icon/undone.png"></li>');
-			$('#removes').append('<li class="task"><img class="remove" src="./img/icon/del.png"></li>');
+			var index = $('#tasks').children().size() - 1;
+			$('#tasks').append('<li class="task' + index + '">' + task_name + '</li>');
+			$('#dones').append('<li class="task' + index + '"><img class="undone" src="./img/icon/undone.png"></li>');
+			$('#removes').append('<li class="task' + index + '"><img class="remove" src="./img/icon/del.png"></li>');
+			addTask(task_name);
 		}
 	});
 
@@ -90,15 +128,61 @@ $(document).ready(function() {
 		showTasks();
 	});
 
+	var removeTask = function(task_num) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_name = $('#list .selected').html();
+		if(list_name === null) {
+			return;
+		}
+		for(var i = 0; i < lists.length; i++) {
+			if(lists[i].list_name === list_name) {
+				var new_tasks = [];
+				for(var j = 0; j < lists[i].tasks.length; j++) {
+					if(j == task_num) {
+						continue;
+					}
+					new_tasks.push(lists[i].tasks[j]);
+				}
+				lists[i].tasks = new_tasks;
+				setLists(lists);
+				break;
+			}
+		}
+	}
+
+	var setDone = function(task_num, done) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_name = $('#list .selected').html();
+		if(list_name === null) {
+			return;
+		}
+		for(var i = 0; i < lists.length; i++) {
+			if(lists[i].list_name === list_name) {
+				lists[i].tasks[task_num].done = done;
+				setLists(lists);
+				break;
+			}
+		}
+	}
+
 	$(document).on("click", "#dones li", function() {
+		var $done_class = $(this).attr("class");
 		if($(this).children().hasClass("done")) {
 			$(this).children().removeClass("done");
 			$(this).children().addClass("undone");
 			$(this).children().attr("src", "./img/icon/undone.png");
+			setDone($done_class.substring(4), "undone");
 		} else {
 			$(this).children().removeClass("undone");
 			$(this).children().addClass("done");
 			$(this).children().attr("src", "./img/icon/done.png");
+			setDone($done_class.substring(4), "done");
 		}
 	});
 
@@ -107,6 +191,7 @@ $(document).ready(function() {
 		$('.' + $remove_class).fadeOut("slow", function() {
 			$('.' + $remove_class).remove();
 		});
+		removeTask($remove_class.substring(4));
 	});
 
 });
