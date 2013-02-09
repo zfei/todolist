@@ -104,7 +104,7 @@ $(document).ready(function() {
 
 	$(document).on("click", "#removes li", function() {
 		var $remove_class = $(this).attr("class");
-		$('.' + $remove_class).hide("slow", function() {
+		$('.' + $remove_class).fadeOut("slow", function() {
 			$('.' + $remove_class).remove();
 		});
 	});
