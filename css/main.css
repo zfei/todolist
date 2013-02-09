@@ -18,7 +18,9 @@ body {
 	margin: 5%;
 	background-color: rgba(255,255,255,0.8);
 	width: 90%;
-	height: 90%;
+	min-height: 90%;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 h1 {
@@ -36,11 +38,6 @@ h1 {
 	position: absolute;
 	width: 100%;
 }
-
-/*#scroll {
-	height: 100%;
-	overflow: scroll;
-}*/
 
 #list_wrapper {
 	-moz-border-radius: 0 0 10px 0;
@@ -78,7 +75,6 @@ h1 {
 }
 
 #tasks {
-	/*margin-left: 5px;*/
 	border: 1px solid black;
 	border-top: 0px;
 	width: 100%;
@@ -97,7 +93,6 @@ h1 {
 }
 
 #dones, #removes {
-	/*margin-left: 5px;*/
 	border: 1px solid black;
 	border-top: 0px;
 	width: 100%;
