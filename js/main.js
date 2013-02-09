@@ -5,7 +5,6 @@ $(document).ready(function() {
 		if(list_name != null && list_name != "") {
 			$('#list').append('<li>' + list_name + '</li>');
 		}
-		
 	});
 
 	$('#new_task').click(function() {
@@ -15,7 +14,22 @@ $(document).ready(function() {
 			$('#dones').append('<li>Done</li>');
 			$('#removes').append('<li>Remove</li>');
 		}
-		
+	});
+
+	$(document).on("click", ".done", function(){
+		if($(this).html() === "Done") {
+			$(this).html("Undone");
+		} else {
+			$(this).html("Done");
+		}
+	});
+
+	$(document).on("click", ".remove", function(){
+		var $remove_class = $(this).attr("class");
+		$remove_class = $remove_class.split(" ")[1];
+		$('.'+$remove_class).hide("slow", function(){
+			$('.'+$remove_class).remove();
+		});
 	});
 
 });
