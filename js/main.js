@@ -220,9 +220,37 @@ $(document).ready(function() {
 		}
 	});
 
+	var removeList = function() {
+			var lists = getLists();
+			if(lists === []) {
+				return;
+			}
+			var list_num = $('#list .selected').attr("class");
+			list_num = list_num.split(" ");
+			if(list_num[0] === "selected") {
+				list_num = list_num[1].substring(4);
+			} else {
+				list_num = list_num[0].substring(4);
+			}
+			var new_lists = [];
+			for(var i = 0; i < lists.length; i++) {
+				if(i == list_num) {
+					continue;
+				}
+				new_lists.push(lists[i]);
+			}
+			setLists(new_lists);
+		};
+
 	$('#remove_list').click(function() {
-		alert("remove list");
+		var r = confirm("Are you sure to remove current list?");
+		if(r == true) {
+			removeList();
+		} else {
+			return;
+		}
 		initialize();
+		$('#pref_panel').fadeOut("slow");
 	});
 
 	$('#remove_done').click(function() {
