@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Galindo|Tenor+Sans|Nova+Square|VT323);
+@import url(http://fonts.googleapis.com/css?family=Galindo|Nova+Square|VT323);
 
 .group:after {
   content: "";
@@ -40,8 +40,8 @@ h1 {
 	padding: 10px;
 	height: 40px;
 	text-align: center;
-	font-family: 'VT323', cursive;
-	font-size: 40px;
+	font-family: 'Nova Square', cursive;
+	font-size: 35px;
 	color: white;
 	text-shadow: 4px 4px 4px grey;
 }
@@ -250,4 +250,53 @@ h1 {
 
 #file_import {
 	display: none;
+}
+
+@media only screen and (max-width: 720px) {
+	h1 {
+		margin-bottom: 1%;
+		padding: 7px;
+		text-align: center;
+		font-family: 'Nova Square', cursive;
+		height: 30px;
+		font-size: 25px;
+		color: white;
+	}
+
+	#pref {
+		top: 8px;
+	}
+
+	#pref img {
+		height: 28px;
+		width: 28px;
+	}
+
+	#pref_panel {
+		top: 40px;
+	}
+
+	.label  {
+		text-indent: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	#tasks li {
+		padding-left: 10px;
+	}
+
+	#list li {
+		height: 20px;
+		padding: 2px 0;
+		font-size: 20px;
+	}
+
+	#list_wrapper {
+		width: 25%;
+	}
+
+	#task_wrapper {
+		width: 52%;
+	}
 }
