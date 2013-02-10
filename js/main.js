@@ -320,4 +320,10 @@ $(document).ready(function() {
 		$('#pref_panel').fadeOut("slow");
 	});
 
+	$('#about').click(function(){
+		alert("This web app is brought to you by Zhiye Fei.\n\n\
+			A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)\n\n\
+			File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w ");
+	});
+
 });
