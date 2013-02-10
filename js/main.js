@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	var setLists = function(lists) {
 			localStorage.setItem("lists", JSON.stringify(lists));
-		}
+		};
 
 	var getLists = function() {
 			var lists = localStorage.getItem("lists");
@@ -11,7 +11,7 @@ $(document).ready(function() {
 				lists = "[]";
 			}
 			return JSON.parse(lists);
-		}
+		};
 
 	var getTasks = function() {
 			var lists = getLists();
@@ -43,7 +43,7 @@ $(document).ready(function() {
 					$('#list').append('<li class="list' + i + '">' + lists[i].list_name + '</li>');
 				}
 			}
-		}
+		};
 
 	var showTasks = function() {
 			var tasks = getTasks();
@@ -60,12 +60,12 @@ $(document).ready(function() {
 				$('#dones').append('<li class="task' + i + '"><img class="' + done + '" src="./img/icon/' + done + '.png"></li>');
 				$('#removes').append('<li class="task' + i + '"><img class="remove" src="./img/icon/del.png"></li>');
 			}
-		}
+		};
 
 	var initialize = function() {
 			showLists();
 			showTasks();
-		}
+		};
 
 	initialize();
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
 			};
 			lists.push(list_obj);
 			setLists(lists);
-		}
+		};
 
 	var addTask = function(task_name) {
 			var lists = getLists();
@@ -96,7 +96,7 @@ $(document).ready(function() {
 				"done": "undone"
 			});
 			setLists(lists);
-		}
+		};
 
 	$(document).on("click", "#new_list", function() {
 		var list_name = prompt("Please enter list name", "My List");
@@ -153,7 +153,7 @@ $(document).ready(function() {
 			}
 			lists[list_num].tasks = new_tasks;
 			setLists(lists);
-		}
+		};
 
 	var setDone = function(task_num, done) {
 			var lists = getLists();
@@ -169,7 +169,7 @@ $(document).ready(function() {
 			}
 			lists[list_num].tasks[task_num].done = done;
 			setLists(lists);
-		}
+		};
 
 	$(document).on("click", "#dones li", function() {
 		if($(this).hasClass("label")) {
@@ -196,10 +196,17 @@ $(document).ready(function() {
 		var r = confirm("Are you sure to remove this task?");
 		if(r == true) {
 			var $remove_class = $(this).attr("class");
+			var counter = 1;
 			$('.' + $remove_class).fadeOut("slow", function() {
-				$('.' + $remove_class).remove();
+				if(counter == 1) {
+					$('.' + $remove_class).remove();
+					removeTask($remove_class.substring(4));
+				}
+				if(counter ==3) {
+					showTasks();
+				}
+				counter++;
 			});
-			removeTask($remove_class.substring(4));
 		} else {
 			return;
 		}
@@ -219,8 +226,18 @@ $(document).ready(function() {
 	});
 
 	$('#remove_done').click(function() {
-		alert("remove done");
-		initialize();
+		var r = confirm("Are you sure to remove all finished tasks in current list?");
+		if(r == true) {
+			while ($('#dones li .done').size() != 0) {
+				var $remove_class = $('#dones li .done').first().parent().attr("class");
+				$('.' + $remove_class).remove();
+				removeTask($remove_class.substring(4));
+				showTasks();
+			}
+		} else {
+			return;
+		}
+		$('#pref_panel').fadeOut("slow");
 	});
 
 	$('#erase').click(function() {
