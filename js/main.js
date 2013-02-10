@@ -15,20 +15,17 @@ $(document).ready(function() {
 
 	var getTasks = function() {
 		var lists = getLists();
-		if(lists === []) {
+		if(lists === [] || $('#list .selected').size() === 0) {
 			return [];
 		}
-		var list_name = $('#list .selected').html();
-		if(list_name === "") {
-			return [];
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
 		}
-		var tasks = [];
-		for(var i = 0; i < lists.length; i++) {
-			if(lists[i].list_name === list_name) {
-				tasks = lists[i].tasks;
-				break;
-			}
-		}
+		var tasks = lists[list_num].tasks;
 		return tasks;
 	};
 
@@ -41,9 +38,9 @@ $(document).ready(function() {
 		}
 		for(var i = 0; i < lists.length; i++) {
 			if(i === 0) {
-				$('#list').append('<li class="selected">' + lists[i].list_name + '</li>');
+				$('#list').append('<li class="selected list' + i + '">' + lists[i].list_name + '</li>');
 			} else {
-				$('#list').append('<li>' + lists[i].list_name + '</li>');
+				$('#list').append('<li class="list' + i + '">' + lists[i].list_name + '</li>');
 			}
 		}
 	}
@@ -84,31 +81,35 @@ $(document).ready(function() {
 		if(lists === []) {
 			return;
 		}
-		var list_name = $('#list .selected').html();
-		if(list_name === null) {
-			return;
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
 		}
-		for(var i = 0; i < lists.length; i++) {
-			if(lists[i].list_name === list_name) {
-				lists[i].tasks.push({
-					"task_name": task_name,
-					"done": "undone"
-				});
-				setLists(lists);
-				break;
-			}
-		}
+		lists[list_num].tasks.push({
+			"task_name": task_name,
+			"done": "undone"
+		});
+		setLists(lists);
 	}
 
-	$(document).on("click", "#new_list", function() {
+	$(document).on("click", "#new_list", function() {		
 		var list_name = prompt("Please enter list name", "My List");
 		if(list_name != null && list_name != "") {
-			$('#list').append('<li>' + list_name + '</li>');
+			$('.selected').removeClass("selected");
+			$('#list').append('<li class="selected list' + ($('#list').children().size()-1) + '">' + list_name + '</li>');
 			addList(list_name);
+			showTasks();
 		}
 	});
 
 	$(document).on("click", "#new_task", function() {
+		if($('.selected').size() === 0) {
+			alert("Please add a list first :]");
+			return;
+		}
 		var task_name = prompt("Please enter task name", "My task");
 		if(task_name != null && task_name != "") {
 			var index = $('#tasks').children().size() - 1;
@@ -133,24 +134,22 @@ $(document).ready(function() {
 		if(lists === []) {
 			return;
 		}
-		var list_name = $('#list .selected').html();
-		if(list_name === null) {
-			return;
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
 		}
-		for(var i = 0; i < lists.length; i++) {
-			if(lists[i].list_name === list_name) {
-				var new_tasks = [];
-				for(var j = 0; j < lists[i].tasks.length; j++) {
-					if(j == task_num) {
-						continue;
-					}
-					new_tasks.push(lists[i].tasks[j]);
-				}
-				lists[i].tasks = new_tasks;
-				setLists(lists);
-				break;
+		var new_tasks = [];
+		for(var j = 0; j < lists[list_num].tasks.length; j++) {
+			if(j == task_num) {
+				continue;
 			}
+			new_tasks.push(lists[list_num].tasks[j]);
 		}
+		lists[list_num].tasks = new_tasks;
+		setLists(lists);
 	}
 
 	var setDone = function(task_num, done) {
@@ -158,20 +157,21 @@ $(document).ready(function() {
 		if(lists === []) {
 			return;
 		}
-		var list_name = $('#list .selected').html();
-		if(list_name === null) {
-			return;
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
 		}
-		for(var i = 0; i < lists.length; i++) {
-			if(lists[i].list_name === list_name) {
-				lists[i].tasks[task_num].done = done;
-				setLists(lists);
-				break;
-			}
-		}
+		lists[list_num].tasks[task_num].done = done;
+		setLists(lists);
 	}
 
 	$(document).on("click", "#dones li", function() {
+		if($(this).hasClass("label")){
+			return;
+		}
 		var $done_class = $(this).attr("class");
 		if($(this).children().hasClass("done")) {
 			$(this).children().removeClass("done");
@@ -187,6 +187,9 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", "#removes li", function() {
+		if($(this).hasClass("label")){
+			return;
+		}
 		var $remove_class = $(this).attr("class");
 		$('.' + $remove_class).fadeOut("slow", function() {
 			$('.' + $remove_class).remove();
