@@ -245,6 +245,10 @@ $(document).ready(function() {
 	$('#remove_list').click(function() {
 		var r = confirm("Are you sure to remove current list?");
 		if(r == true) {
+			if($('#list .selected').size()==0){
+				alert("There are no lists to remove.");
+				return;
+			}
 			removeList();
 		} else {
 			return;
