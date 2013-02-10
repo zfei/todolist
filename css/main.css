@@ -228,7 +228,7 @@ h1 {
 	padding: 10px;
 	z-index: 2;
 	overflow-y: scroll;
-	visibility: hidden;
+	display: none;
 }
 
 #pref li {

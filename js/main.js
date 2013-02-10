@@ -198,10 +198,10 @@ $(document).ready(function() {
 	});
 
 	$('#pref img').click(function(){
-		if($('#pref_panel').css("visibility") === "hidden") {
-			$('#pref_panel').css("visibility", "visible");
+		if($('#pref_panel').css("display") === "none") {
+			$('#pref_panel').fadeIn("slow");
 		} else {
-			$('#pref_panel').css("visibility", "hidden");
+			$('#pref_panel').fadeOut("slow");
 		}
 	});
 
