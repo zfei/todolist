@@ -197,4 +197,12 @@ $(document).ready(function() {
 		removeTask($remove_class.substring(4));
 	});
 
+	$('#pref img').click(function(){
+		if($('#pref_panel').css("visibility") === "hidden") {
+			$('#pref_panel').css("visibility", "visible");
+		} else {
+			$('#pref_panel').css("visibility", "hidden");
+		}
+	});
+
 });
