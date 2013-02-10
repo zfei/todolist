@@ -247,3 +247,7 @@ h1 {
 	font-size: 12px;
 	border: 1px solid black;
 }
+
+#file_import {
+	display: none;
+}

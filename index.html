@@ -9,6 +9,7 @@
     <link rel=stylesheet href="css/main.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <script src="js/file_saver/FileSaver.min.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -21,12 +22,13 @@
             <img src="./img/icon/pref.png">
             <div id="pref_panel">
                 <ul>
-                    <li>Remove Selected List</li>
-                    <li>Remove Finished Tasks in Current List</li>
-                    <li>Erase Everything</li>
-                    <li>Import Data in JSON</li>
-                    <li>Export Data in JSON</li>
+                    <li id="remove_list">Remove Current List</li>
+                    <li id="remove_done">Remove Finished Tasks in Current List</li>
+                    <li id="erase">Erase Everything</li>
+                    <li id="import">Import Data in JSON</li>
+                    <li id="export">Export Data in JSON</li>
                 </ul>
+                <input type="file" id="file_import">
             </div>
         </div>
 
