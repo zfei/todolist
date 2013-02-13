@@ -1,9 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Galindo|Nova+Square|VT323);
 
 .group:after {
+	clear: both;
 	content: "";
 	display: table;
-	clear: both;
 }
 
 body {
@@ -11,23 +11,21 @@ body {
 }
 
 #wrapper {
-	position: absolute;
+	background-color: rgba(255,255,255,.8);
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	margin: 5%;
-	background-color: rgba(255,255,255,.8);
-	width: 90%;
-	height: 90%;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	-moz-box-shadow: 5px 5px 5px #888;
 	-webkit-box-shadow: 5px 5px 5px #888;
+	-moz-box-shadow: 5px 5px 5px #888;
 	box-shadow: 5px 5px 5px #888;
+	height: 90%;
+	margin: 5%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	position: absolute;
+	width: 90%;
 }
 
 h1 {
-	-moz-border-radius: 15px 15px 0 0;
-	border-radius: 15px 15px 0 0;
 	background: rgb(183,222,237); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(183,222,237,1) 0%, rgba(113,206,239,1) 50%, rgba(33,180,226,1) 51%, rgba(183,222,237,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(183,222,237,1)), color-stop(50%,rgba(113,206,239,1)), color-stop(51%,rgba(33,180,226,1)), color-stop(100%,rgba(183,222,237,1))); /* Chrome,Safari4+ */
@@ -35,14 +33,16 @@ h1 {
 	background: -o-linear-gradient(top,  rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(183,222,237,1) 0%,rgba(113,206,239,1) 50%,rgba(33,180,226,1) 51%,rgba(183,222,237,1) 100%); /* W3C */
+	-moz-border-radius: 15px 15px 0 0;
+	border-radius: 15px 15px 0 0;
+	color: white;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7deed', endColorstr='#b7deed',GradientType=0 ); /* IE6-9 */
-	margin-bottom: 1%;
-	padding: 10px;
-	height: 40px;
-	text-align: center;
 	font-family: 'Galindo', cursive;
 	font-size: 38px;
-	color: white;
+	height: 40px;
+	margin-bottom: 1%;
+	padding: 10px;
+	text-align: center;
 	text-shadow: 4px 4px 4px grey;
 }
 
@@ -53,26 +53,19 @@ h1 {
 
 #list_wrapper {
 	float: left;
-	width: 15%;
 	margin-left: 1%;
+	width: 15%;
 }
 
 #list {
-	/*-moz-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;*/
 	border: 1px solid black;
+	/* -moz-border-radius: 0 0 10px 10px; */
+	/* border-radius: 0 0 10px 10px; */
 	border-top: 0px;
 	width: 100%;
 }
 
 #list li {
-	padding: 7px 0;
-	width: 100%;
-	text-align: center;
-	border-top: 1px solid black;
-	font-family: 'VT323', cursive;
-	font-size: 19px;
-	color: grey;
 	background: rgb(242,246,248); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(242,246,248,.7) 0%, rgba(216,225,231,.7) 50%, rgba(181,198,208,.7) 51%, rgba(224,239,249,.7) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(242,246,248,.7)), color-stop(50%,rgba(216,225,231,.7)), color-stop(51%,rgba(181,198,208,.7)), color-stop(100%,rgba(224,239,249,.7))); /* Chrome,Safari4+ */
@@ -80,7 +73,14 @@ h1 {
 	background: -o-linear-gradient(top,  rgba(242,246,248,.7) 0%,rgba(216,225,231,.7) 50%,rgba(181,198,208,.7) 51%,rgba(224,239,249,.7) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  rgba(242,246,248,.7) 0%,rgba(216,225,231,.7) 50%,rgba(181,198,208,.7) 51%,rgba(224,239,249,.7) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(242,246,248,.7) 0%,rgba(216,225,231,.7) 50%,rgba(181,198,208,.7) 51%,rgba(224,239,249,.7) 100%); /* W3C */
+	border-top: 1px solid black;
+	color: grey;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6-9 */
+	font-family: 'VT323', cursive;
+	font-size: 19px;
+	padding: 7px 0;
+	text-align: center;
+	width: 100%;
 }
 
 #list .selected {
@@ -90,8 +90,8 @@ h1 {
 #task_wrapper {
 	display: block;
 	float: left;
-	width: 62%;
 	margin-left: 1%;
+	width: 62%;
 }
 
 #tasks {
@@ -101,12 +101,6 @@ h1 {
 }
 
 #tasks li {
-	border-top: 1px solid black;
-	padding: 7px;
-	padding-left: 20px;
-	font-family: 'Galindo', cursive;
-	font-size: 19px;
-	color: #2A848E;
 	background: rgb(157,213,58); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(157,213,58,.7) 0%, rgba(161,213,79,.7) 50%, rgba(128,194,23,.7) 51%, rgba(124,188,10,.7) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(157,213,58,.7)), color-stop(50%,rgba(161,213,79,.7)), color-stop(51%,rgba(128,194,23,.7)), color-stop(100%,rgba(124,188,10,.7))); /* Chrome,Safari4+ */
@@ -114,45 +108,51 @@ h1 {
 	background: -o-linear-gradient(top,  rgba(157,213,58,.7) 0%,rgba(161,213,79,.7) 50%,rgba(128,194,23,.7) 51%,rgba(124,188,10,.7) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  rgba(157,213,58,.7) 0%,rgba(161,213,79,.7) 50%,rgba(128,194,23,.7) 51%,rgba(124,188,10,.7) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(157,213,58,.7) 0%,rgba(161,213,79,.7) 50%,rgba(128,194,23,.7) 51%,rgba(124,188,10,.7) 100%); /* W3C */
+	border-top: 1px solid black;
+	color: #2A848E;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
+	font-family: 'Galindo', cursive;
+	font-size: 19px;
+	padding: 7px;
+	padding-left: 20px;
 }
 
 #dones li.label {
-	padding: 7px;
+	color: #5D622D;
 	font-family: 'Galindo', cursive;
 	font-size: 19px;
-	color: #5D622D;
+	padding: 7px;
 	text-align: center;
 }
 
 #removes li.label {
-	padding: 7px;
+	color: #62322D;
 	font-family: 'Galindo', cursive;
 	font-size: 19px;
-	color: #62322D;
+	padding: 7px;
 	text-align: center;
 }
 
 #done_wrapper, #remove_wrapper {
+	border-top: 0px;
 	display: block;
 	float: left;
-	border-top: 0px;
 	width: 10%;
 }
 
 #dones, #removes {
-	border-right: 1px solid black;
 	border-bottom: 1px solid black;
+	border-right: 1px solid black;
 	border-top: 0px;
 	width: 100%;
 }
 
 #dones li, #removes li {
 	border-top: 1px solid black;
-	padding: 5px;
-	text-align: center;
 	font-family: 'Galindo', cursive;
 	font-size: 15px;
+	padding: 5px;
+	text-align: center;
 }
 
 #dones li {
@@ -178,18 +178,18 @@ h1 {
 }
 
 #copy {
+	background-color: rgba(255,255,255,0.4);
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
-	display: block;
-	position: fixed;
 	bottom: 0px;
-	right: 0px;
-	width: 90%;
-	margin: 0 5%;
-	background-color: rgba(255,255,255,0.4);
-	text-align: center;
+	display: block;
 	font-family: 'Nova Square', cursive;
 	font-size: 12px;
+	margin: 0 5%;
+	position: fixed;
+	right: 0px;
+	text-align: center;
+	width: 90%;
 }
 
 #dones img, #removes img {
@@ -198,12 +198,12 @@ h1 {
 }
 
 #pref {
+	height: 50%;
+	left: 12px;
 	position: absolute;
 	top: 12px;
-	left: 12px;
-	height: 50%;
+	/* -webkit-animation: rotation 20s infinite linear; */
 	width: 30%;
-	/*-webkit-animation: rotation 20s infinite linear;*/
 }
 
 #pref img {
@@ -211,23 +211,24 @@ h1 {
 	width: 35px;
 }
 
-/*@-webkit-keyframes rotation {
-    from {-webkit-transform: rotate(0deg);}
-    to   {-webkit-transform: rotate(359deg);}
-}*/
+/* @-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg); */
+
+/* }
+    to   {-webkit-transform: rotate(359deg); */
 
 #pref_panel {
+	background-color: rgba(0,0,0,.4);
 	-moz-border-radius: 0 15px;
 	border-radius: 0 15px;
+	display: none;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 10px;
 	position: absolute;
 	top: 60px;
-	height: 100%;
 	width: 100%;
-	background-color: rgba(0,0,0,.4);
-	padding: 10px;
 	z-index: 2;
-	overflow-y: scroll;
-	display: none;
 }
 
 #pref li {
@@ -238,13 +239,13 @@ h1 {
 	background: -o-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* W3C */
+	border: 1px solid black;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
-	padding: 10px;
-	margin-bottom: 5px;
-	text-align: center;
 	font-family: 'Nova Square', cursive;
 	font-size: 12px;
-	border: 1px solid black;
+	margin-bottom: 5px;
+	padding: 10px;
+	text-align: center;
 }
 
 #file_import {
@@ -253,12 +254,12 @@ h1 {
 
 @media only screen and (max-width: 720px) {
 	h1 {
+		color: white;
+		font-size: 25px;
+		height: 30px;
 		margin-bottom: 1%;
 		padding: 5px 0;
 		text-align: center;
-		height: 30px;
-		font-size: 25px;
-		color: white;
 	}
 
 	#pref {
@@ -275,9 +276,9 @@ h1 {
 	}
 
 	.label  {
+		overflow: hidden;
 		text-indent: 100%;
 		white-space: nowrap;
-		overflow: hidden;
 	}
 
 	#tasks li {
@@ -285,8 +286,8 @@ h1 {
 	}
 
 	#list li {
-		padding: 6px 0;
 		font-size: 21px;
+		padding: 6px 0;
 	}
 
 	#list_wrapper {
