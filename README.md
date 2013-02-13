@@ -23,16 +23,16 @@ Fetures
 
 Code quality
 -------------
-HTML
+*	HTML
 	*	Use all lowercase in tag names
 	*	Close all elements that have content
 	*	Do not close standalone tags
 	*	Some other conventional html5 coding style
-CSS
+*	CSS
 	*	Sorting attributes alphabetically
 	*	Use tab in indentation
 	*	Indentation in media query
-Javascript
+*	Javascript
 	*	Basically adhering to [Google Javascript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
 
 Mobile optimization
