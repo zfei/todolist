@@ -44,13 +44,3 @@ Sources
 --------------
 *	A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)
 *	File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w
-
-
-All functionalities including data import/export are written in javascript. The JS File Saver lib is used under MIT license.
-Open the about dialog in the demo for more details.
-
-You are free to do anything with the code. Credit appreciated.
-
-sdfladj
-------------
-safasdsdf
