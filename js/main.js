@@ -1,102 +1,102 @@
 $(document).ready(function() {
 
-	var setLists = function(lists) {
-			localStorage.setItem("lists", JSON.stringify(lists));
-		};
+	function setLists(lists) {
+		localStorage.setItem("lists", JSON.stringify(lists));
+	};
 
-	var getLists = function() {
-			var lists = localStorage.getItem("lists");
-			if(lists === null) {
-				localStorage.setItem("lists", "[]");
-				lists = "[]";
-			}
-			return JSON.parse(lists);
-		};
+	function getLists() {
+		var lists = localStorage.getItem("lists");
+		if(lists === null) {
+			localStorage.setItem("lists", "[]");
+			lists = "[]";
+		}
+		return JSON.parse(lists);
+	};
 
-	var getTasks = function() {
-			var lists = getLists();
-			if(lists === [] || $('#list .selected').size() === 0) {
-				return [];
-			}
-			var list_num = $('#list .selected').attr("class");
-			list_num = list_num.split(" ");
-			if(list_num[0] === "selected") {
-				list_num = list_num[1].substring(4);
+	function getTasks() {
+		var lists = getLists();
+		if(lists === [] || $('#list .selected').size() === 0) {
+			return [];
+		}
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
+		}
+		var tasks = lists[list_num].tasks;
+		return tasks;
+	};
+
+	function showLists() {
+		var lists = getLists();
+		$('#list').empty();
+		$('#list').append('<li id="new_list">New List</li>');
+		if(lists === []) {
+			return;
+		}
+		for(var i = 0; i < lists.length; i++) {
+			if(i === 0) {
+				$('#list').append('<li class="selected list' + i + '">' + lists[i].list_name + '</li>');
 			} else {
-				list_num = list_num[0].substring(4);
+				$('#list').append('<li class="list' + i + '">' + lists[i].list_name + '</li>');
 			}
-			var tasks = lists[list_num].tasks;
-			return tasks;
-		};
+		}
+	};
 
-	var showLists = function() {
-			var lists = getLists();
-			$('#list').empty();
-			$('#list').append('<li id="new_list">New List</li>');
-			if(lists === []) {
-				return;
-			}
-			for(var i = 0; i < lists.length; i++) {
-				if(i === 0) {
-					$('#list').append('<li class="selected list' + i + '">' + lists[i].list_name + '</li>');
-				} else {
-					$('#list').append('<li class="list' + i + '">' + lists[i].list_name + '</li>');
-				}
-			}
-		};
+	function showTasks() {
+		var tasks = getTasks();
+		$('#tasks').empty();
+		$('#tasks').append('<li id="new_task">New Task</li>');
+		$('#dones').empty();
+		$('#dones').append('<li class="label">Done</li>');
+		$('#removes').empty();
+		$('#removes').append('<li class="label">Remove</li>');
+		for(var i = 0; i < tasks.length; i++) {
+			var task_name = tasks[i].task_name;
+			var done = tasks[i].done;
+			$('#tasks').append('<li class="task' + i + '">' + task_name + '</li>');
+			$('#dones').append('<li class="task' + i + '"><img class="' + done + '" src="./img/icon/' + done + '.png"></li>');
+			$('#removes').append('<li class="task' + i + '"><img class="remove" src="./img/icon/del.png"></li>');
+		}
+	};
 
-	var showTasks = function() {
-			var tasks = getTasks();
-			$('#tasks').empty();
-			$('#tasks').append('<li id="new_task">New Task</li>');
-			$('#dones').empty();
-			$('#dones').append('<li class="label">Done</li>');
-			$('#removes').empty();
-			$('#removes').append('<li class="label">Remove</li>');
-			for(var i = 0; i < tasks.length; i++) {
-				var task_name = tasks[i].task_name;
-				var done = tasks[i].done;
-				$('#tasks').append('<li class="task' + i + '">' + task_name + '</li>');
-				$('#dones').append('<li class="task' + i + '"><img class="' + done + '" src="./img/icon/' + done + '.png"></li>');
-				$('#removes').append('<li class="task' + i + '"><img class="remove" src="./img/icon/del.png"></li>');
-			}
-		};
-
-	var initialize = function() {
-			showLists();
-			showTasks();
-		};
+	function initialize() {
+		showLists();
+		showTasks();
+	};
 
 	initialize();
 
-	var addList = function(list_name) {
-			var lists = getLists();
-			var list_obj = {
-				"list_name": list_name,
-				"tasks": []
-			};
-			lists.push(list_obj);
-			setLists(lists);
+	function addList(list_name) {
+		var lists = getLists();
+		var list_obj = {
+			"list_name": list_name,
+			"tasks": []
 		};
+		lists.push(list_obj);
+		setLists(lists);
+	};
 
-	var addTask = function(task_name) {
-			var lists = getLists();
-			if(lists === []) {
-				return;
-			}
-			var list_num = $('#list .selected').attr("class");
-			list_num = list_num.split(" ");
-			if(list_num[0] === "selected") {
-				list_num = list_num[1].substring(4);
-			} else {
-				list_num = list_num[0].substring(4);
-			}
-			lists[list_num].tasks.push({
-				"task_name": task_name,
-				"done": "undone"
-			});
-			setLists(lists);
-		};
+	function addTask(task_name) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
+		}
+		lists[list_num].tasks.push({
+			"task_name": task_name,
+			"done": "undone"
+		});
+		setLists(lists);
+	};
 
 	$(document).on("click", "#new_list", function() {
 		var list_name = prompt("Please enter list name", "My List");
@@ -132,44 +132,44 @@ $(document).ready(function() {
 		showTasks();
 	});
 
-	var removeTask = function(task_num) {
-			var lists = getLists();
-			if(lists === []) {
-				return;
+	function removeTask(task_num) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
+		}
+		var new_tasks = [];
+		for(var j = 0; j < lists[list_num].tasks.length; j++) {
+			if(j == task_num) {
+				continue;
 			}
-			var list_num = $('#list .selected').attr("class");
-			list_num = list_num.split(" ");
-			if(list_num[0] === "selected") {
-				list_num = list_num[1].substring(4);
-			} else {
-				list_num = list_num[0].substring(4);
-			}
-			var new_tasks = [];
-			for(var j = 0; j < lists[list_num].tasks.length; j++) {
-				if(j == task_num) {
-					continue;
-				}
-				new_tasks.push(lists[list_num].tasks[j]);
-			}
-			lists[list_num].tasks = new_tasks;
-			setLists(lists);
-		};
+			new_tasks.push(lists[list_num].tasks[j]);
+		}
+		lists[list_num].tasks = new_tasks;
+		setLists(lists);
+	};
 
-	var setDone = function(task_num, done) {
-			var lists = getLists();
-			if(lists === []) {
-				return;
-			}
-			var list_num = $('#list .selected').attr("class");
-			list_num = list_num.split(" ");
-			if(list_num[0] === "selected") {
-				list_num = list_num[1].substring(4);
-			} else {
-				list_num = list_num[0].substring(4);
-			}
-			lists[list_num].tasks[task_num].done = done;
-			setLists(lists);
-		};
+	function setDone(task_num, done) {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
+		}
+		lists[list_num].tasks[task_num].done = done;
+		setLists(lists);
+	};
 
 	$(document).on("click", "#dones li", function() {
 		if($(this).hasClass("label")) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
 					$('.' + $remove_class).remove();
 					removeTask($remove_class.substring(4));
 				}
-				if(counter ==3) {
+				if(counter == 3) {
 					showTasks();
 				}
 				counter++;
@@ -220,32 +220,32 @@ $(document).ready(function() {
 		}
 	});
 
-	var removeList = function() {
-			var lists = getLists();
-			if(lists === []) {
-				return;
+	function removeList() {
+		var lists = getLists();
+		if(lists === []) {
+			return;
+		}
+		var list_num = $('#list .selected').attr("class");
+		list_num = list_num.split(" ");
+		if(list_num[0] === "selected") {
+			list_num = list_num[1].substring(4);
+		} else {
+			list_num = list_num[0].substring(4);
+		}
+		var new_lists = [];
+		for(var i = 0; i < lists.length; i++) {
+			if(i == list_num) {
+				continue;
 			}
-			var list_num = $('#list .selected').attr("class");
-			list_num = list_num.split(" ");
-			if(list_num[0] === "selected") {
-				list_num = list_num[1].substring(4);
-			} else {
-				list_num = list_num[0].substring(4);
-			}
-			var new_lists = [];
-			for(var i = 0; i < lists.length; i++) {
-				if(i == list_num) {
-					continue;
-				}
-				new_lists.push(lists[i]);
-			}
-			setLists(new_lists);
-		};
+			new_lists.push(lists[i]);
+		}
+		setLists(new_lists);
+	};
 
 	$('#remove_list').click(function() {
 		var r = confirm("Are you sure to remove current list?");
 		if(r == true) {
-			if($('#list .selected').size()==0){
+			if($('#list .selected').size() == 0) {
 				alert("There are no lists to remove.");
 				return;
 			}
@@ -260,7 +260,7 @@ $(document).ready(function() {
 	$('#remove_done').click(function() {
 		var r = confirm("Are you sure to remove all finished tasks in current list?");
 		if(r == true) {
-			while ($('#dones li .done').size() != 0) {
+			while($('#dones li .done').size() != 0) {
 				var $remove_class = $('#dones li .done').first().parent().attr("class");
 				$('.' + $remove_class).remove();
 				removeTask($remove_class.substring(4));
@@ -312,7 +312,6 @@ $(document).ready(function() {
 
 	$('#export').click(function() {
 		// https://github.com/eligrey/FileSaver.js
-		alert("Exporting file...");
 		var blob = new Blob([JSON.stringify(getLists())], {
 			type: "text/plain;charset=utf-8"
 		});
@@ -320,10 +319,10 @@ $(document).ready(function() {
 		$('#pref_panel').fadeOut("slow");
 	});
 
-	$('#about').click(function(){
-		alert("This web app is brought to you by Zhiye Fei.\n\n\
-			A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)\n\n\
-			File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w ");
+	$('#about').click(function() {
+		alert("This web app is brought to you by Zhiye Fei.\n\n" + 
+			"A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)\n\n" + 
+			"File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w ");
 	});
 
 });
