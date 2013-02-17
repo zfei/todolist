@@ -40,7 +40,12 @@ Mobile optimization
 Optimazed the styles on mobile devices.
 Not working on iOS for some reason.
 
-Sources
+Sources & Attributions
 --------------
-*	A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)
-*	File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w
+*	Code
+	*	A File Saver library under MIT license is used. (./js/file_saver/LICENSE.md)
+	*	File Reader JS code is a modified version based on this tutorial: http://tinyurl.com/awv8h9w
+*	Images
+	*	An icon set from [icojam](http://www.icojam.com/blog/?p=177), which is under public domain
+	*	Background image from [pattern8](http://pattern8.com/free-repeat-patterns/stylized-clouds-2)
+	*	Gradient CSS code is from [ColorZilla](http://www.colorzilla.com/gradient-editor/)
